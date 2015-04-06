@@ -12,12 +12,13 @@
   <link rel="stylesheet" href="style/style.css">
 
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="js/frills.js"></script>
 </head>
 
 <body>
 <canvas id="frills-canvas"></canvas>
 
-  <ul>
+  <ul id="frills">
     <li>
       <img class="projectThumbnail" src="img/thumb1.png" width="250" height="250" alt="" />
       <span class="projectDetails">Calendrier de Mécano</span>
@@ -74,7 +75,10 @@
   </ul>
 
 
-  <script defer src="js/frills.js"></script>
+
+  <script>
+  $('#frills').frillsInit()
+  </script>
 
 
 </body>

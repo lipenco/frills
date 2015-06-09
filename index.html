@@ -16,7 +16,6 @@
 </head>
 
 <body>
-<canvas id="frills-canvas"></canvas>
 
   <ul id="frills">
     <li>
@@ -75,9 +74,16 @@
   </ul>
 
 
-
   <script>
-  $('#frills').frillsInit()
+  var frillsOptions = {
+    container : $('#frills'),
+    element: $('.projectThumbnail')
+
+  }
+  var frills = F$(frillsOptions);
+
+
+
   </script>
 
 

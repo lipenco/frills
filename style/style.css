@@ -21,38 +21,15 @@ body {
 
 img {
     border: none;
+    width:100%;
 }
 
-#frills-canvas {
-    position: fixed;
-    margin: 0;
-    padding: 0;
-}
 
 a,a:link,a:visited,a:active,a:hover {
     text-decoration: none;
 }
 
-header {
-    top: 0;
-    height: 160px;
-    position: absolute;
-    width: 100%;
-}
 
-header hr {
-    margin-left: 30px;
-    margin-right: 30px;
-    border: none;
-    border-top: 1px solid #353535;
-    opacity: .4;
-}
-
-header h1 {
-    margin: 0;
-    padding-left: 30px;
-    padding-top: 10px;
-}
 
 
 
@@ -66,7 +43,7 @@ ul {
 
 ul li {
     float: left;
-    margin-right: 20px;
+    /*margin-right: 20px;*/
     padding: 0;
     text-align: center;
 }
@@ -82,16 +59,8 @@ ul li {
 
 .projectTitle {
     font-family: Didot,'DidotLTStdRoman','Times New Roman',Times,serif;
-    font-size: 30pt;
-    margin-top: 0;
-    margin-bottom: 18px;
-}
-
-.projectTags {
-    font-family: Didot,'DidotLTStdRoman','Times New Roman',Times,serif;
-    font-style: italic;
-    font-size: 11pt;
-    color: #353535;
-    margin-bottom: 1px;
-    margin-top: 0;
+    font-size: 15pt;
+    margin-top: 15px;
+    display: block;
+    margin-bottom: 40px;
 }

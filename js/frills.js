@@ -6,9 +6,7 @@
     }
 
     var context;
-    var RADIUS_SCALE = 1;
-    var RADIUS_SCALE_MIN = 1;
-    var RADIUS_SCALE_MAX = 1;
+    var RADIUS_SCALE = 1.05;
     var QUANTITY = 40;
     var particles;
     var mouseX = 40;
@@ -71,10 +69,10 @@
                       y: mouseY
                   },
                   size: 0.2,
-                  angle: 0,
+                  angle: 1,
                   speed: 0.01 + Math.random() * 1,
                   targetSize: 0.2,
-                  fillColor: "rgba(" + n + ", " + n + ", " + n + ", 1.0)",
+                  fillColor: this.color,
                   orbit: this.radius * 0.5
               };
               particles.push(p);
@@ -84,15 +82,17 @@
         setUpCanvasSize: function() {
           this.canvas.width = global.innerWidth;
           this.canvas.height = global.innerHeight;
+          self.radius = this.element.width();
         },
 
         drawParticles: function() {
-          RADIUS_SCALE = Math.min(RADIUS_SCALE, RADIUS_SCALE_MAX);
+          console.log('drow particels')
           context.globalCompositeOperation = 'destination-out';
           context.fillStyle = 'rgba(235,235,235,0.17)';
           context.fillRect(0, 0, context.canvas.width, context.canvas.height);
           if (stopped == true) {
               context.globalCompositeOperation = 'lighter';
+
               erasingCounter += 40;
               if (erasingCounter >= erasingTotal) {
                   clearInterval(looping);
@@ -123,12 +123,13 @@
               context.moveTo((0.5 + n.x) | 0, (0.5 + n.y) | 0);
               context.lineTo((0.5 + o.position.x) | 0, (0.5 + o.position.y) | 0);
               context.stroke();
-              context.arc((0.5 + o.position.x) | 0, (0.5 + o.position.y) | 0, o.size / 2, 0, Math.PI * 2, true);
+              // context.arc((0.5 + o.position.x) | 0, (0.5 + o.position.y) | 0, o.size / 2, 0, Math.PI * 2, true);
               context.fill();
           };
         },
 
         moveParticles: function() {
+            console.log("move particles")
             stopped = false;
             if (looping <= 0 && overThumb) {
               looping = setInterval(this.drawParticles.bind(this), 40);
@@ -151,17 +152,23 @@
             context.fillStyle = 'rgba(239,239,239,1.0)';
             context.fillRect(0, 0, context.canvas.width, context.canvas.height);
             n++;
+
         },
 
-        setUpEvents: function() {
-          var self = this;
-          document.addEventListener('mousemove', self.moveParticles.bind(this), false);
-          window.addEventListener('resize', self.setUpCanvasSize, false);
+        stop: function() {
+          this.element.unbind('mouseover');
+          this.element.unbind('mouseout');
+          $(document).unbind('mousemove');
+        },
 
-          $(global).scroll(function () {
-              overThumb = false;
-              this.scrollCanvas();
-          }.bind(this));
+        restart: function() {
+          this.bindMuseEvents()
+        },
+
+        bindMuseEvents: function() {
+          $(document).mousemove(function() {
+            this.moveParticles();
+          }.bind(this))
 
           this.element.mouseover(function () {
               overThumb = true;
@@ -171,6 +178,22 @@
           this.element.mouseout(function () {
               overThumb = false;
           });
+        },
+
+        setUpEvents: function() {
+          $(document).click(function() {
+            console.log('click')
+          })
+          window.addEventListener('resize', self.setUpCanvasSize, false);
+
+          $(global).scroll(function () {
+              overThumb = false;
+              this.scrollCanvas();
+          }.bind(this));
+
+          this.bindMuseEvents()
+
+
         }
 
     };
@@ -181,12 +204,11 @@
 
         var self = this;
         self.element = options.element;
-        self.radius = options.radius || options.element.width();
-        console.log(self)
+        self.radius = options.elWidth || options.element.width();
+        self.color = options.color || 'black'
 
         self.validate();
-        self.appendCanvas().createContext();
-        this.createParticles();
+        self.appendCanvas().createContext().createParticles();
         this.setUpEvents();
 
     }

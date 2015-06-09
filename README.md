@@ -1,14 +1,18 @@
-# Frills - beutiful museover effect for image gallery
+## Frills - beautiful museover effect for image gallery
 
 
-# Easy set up
+### Easy set up
 
 ```
-var frills = F$({
-  element: $('.projectThumbnail'), // required
-  // color: '#5B527F', optional setting for frills color
-  // elWidth: 300, optional , optional setting for width of element, default el.width()
+// initialize and run:
 
+var frills = F$({
+  // required setting for img element selector:
+  element: $('.projectThumbnail'), 
+  // optional setting for 'frills' color:
+  // color: '#5B527F',
+  // optional setting for width of img element, default el.width():
+  // elWidth: 300
 });
 
 // API:

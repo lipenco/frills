@@ -35,7 +35,7 @@
           this.canvas.id = "f-canvas";
           this.canvas.width = $(global).width();
           this.canvas.height = $(global).height();
-          this.canvas.style.zIndex = 100;
+          this.canvas.style.zIndex = 1000;
           this.canvas.style.position = "fixed";
           this.canvas.style.margin = 0;
           this.canvas.style.padding = 0;
@@ -86,7 +86,6 @@
         },
 
         drawParticles: function() {
-          console.log('drow particels')
           context.globalCompositeOperation = 'destination-out';
           context.fillStyle = 'rgba(235,235,235,0.17)';
           context.fillRect(0, 0, context.canvas.width, context.canvas.height);
@@ -129,7 +128,6 @@
         },
 
         moveParticles: function() {
-            console.log("move particles")
             stopped = false;
             if (looping <= 0 && overThumb) {
               looping = setInterval(this.drawParticles.bind(this), 40);
@@ -181,9 +179,6 @@
         },
 
         setUpEvents: function() {
-          $(document).click(function() {
-            console.log('click')
-          })
           window.addEventListener('resize', self.setUpCanvasSize, false);
 
           $(global).scroll(function () {
